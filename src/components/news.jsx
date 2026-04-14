@@ -38,9 +38,10 @@ export default class News extends Component {
   }
 
   // MediaStack API configuration
-  MEDIASTACK_API_KEY = "22bed9b52b3ea1565ae5f3a2c347575b";
-  MEDIASTACK_BASE_URL = "https://api.mediastack.com/v1/news";
+  MEDIASTACK_API_KEY = import.meta.env.VITE_MEDIASTACK_API_KEY;
+  MEDIASTACK_BASE_URL = import.meta.env.VITE_MEDIASTACK_BASE_URL;
   CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  
 
   // Get request count from localStorage
   getRequestCountFromStorage = () => {
@@ -93,6 +94,7 @@ export default class News extends Component {
   };
 
   async updateNews() {
+
     try {
       const category = this.props.category.toLowerCase();
       
@@ -126,6 +128,8 @@ export default class News extends Component {
       this.props.setProgress(0);
       const url = `${this.MEDIASTACK_BASE_URL}?access_key=${this.MEDIASTACK_API_KEY}&categories=${category}&countries=in&limit=${this.props.pageSize}&offset=0`;
       this.props.setProgress(10);
+
+      
 
       this.setState({ loading: true, error: null });
 

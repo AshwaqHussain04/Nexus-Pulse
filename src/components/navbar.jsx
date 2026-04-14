@@ -8,7 +8,7 @@ export class NavBar extends Component {
         <nav className="navbar sticky-top navbar-expand-lg">
           <div className="container-fluid">
             <a className="navbar-brand" href="#">
-              News Beacon
+              Nexus Pulse
             </a>
             <button
               className="navbar-toggler"
