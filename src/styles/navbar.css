@@ -1,0 +1,204 @@
+/* Navbar Styles */
+.navbar {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.15);
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white !important;
+  letter-spacing: -0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-brand:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.navbar-nav {
+  margin-left: 3rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-radius: 6px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #f59e0b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+  width: 60%;
+}
+
+.nav-link.active {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.navbar-toggler {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-toggler:hover {
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Search Form */
+.d-flex {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-control {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--text-dark);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control:focus {
+  border-color: white !important;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: rgba(30, 58, 138, 0.6);
+  font-weight: 500;
+}
+
+.btn-outline-danger {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-outline-danger:hover {
+  background-color: #ef4444;
+  border-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-left: 0;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0 !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: #f59e0b;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .form-control {
+    width: 100%;
+  }
+
+  .btn-outline-danger {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .navbar-nav {
+    margin-left: 0;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    margin: 0.15rem 0 !important;
+    padding: 0.5rem 0 !important;
+  }
+}
