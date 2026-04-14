@@ -82,6 +82,15 @@ p {
 }
 
 @media (max-width: 768px) {
+  .my-4 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .Container {
+    padding: 1.5rem 0;
+  }
+
   .row {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
@@ -90,16 +99,113 @@ p {
   h1 {
     font-size: 1.75rem;
   }
+
+  .page-header {
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-header p {
+    font-size: 0.95rem;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+  .my-4 {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .Container {
+    padding: 1rem 0;
+  }
+
   .row {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .page-header {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+  }
+
+  .page-header h1 {
+    font-size: 1.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .page-header p {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-header p:last-child {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .my-4 {
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .container {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+
+  .Container {
+    padding: 0.75rem 0;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .page-header {
+    padding: 1.2rem 0.75rem;
+    margin-bottom: 0.75rem;
+    border-radius: 6px;
+  }
+
+  .page-header h1 {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .page-header p {
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
   }
 }
 

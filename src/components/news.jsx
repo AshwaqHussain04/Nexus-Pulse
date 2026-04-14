@@ -258,12 +258,21 @@ export default class News extends Component {
           </div>
         </div>
         <div className="container my-4">
-          {this.state.error && (
-            <div className="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>⚠️ Notice:</strong> {this.state.error}
-              <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          )}
+                      {this.state.error && (
+              <div
+                className="alert alert-danger alert-dismissible fade show shadow-sm"
+                role="alert"
+                style={{ transition: "all 0.3s ease" }}
+              >
+                <strong>⚠️ Notice:</strong> {this.state.error}
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => this.setState({ error: null })}
+                  aria-label="Close"
+                ></button>
+              </div>
+            )}
           <InfiniteScroll
             dataLength={this.state.articles?.length || 0}
             next={this.fetchMoreData}
