@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 2.5rem;
-  color: var(--primary-color);
+  color:#1e3a8a;
 }
 
 h2 {
@@ -215,7 +215,7 @@ p {
 
 /* Main Page Styles */
 .page-header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
   color: white;
   padding: 3rem 2rem;
   margin-bottom: 2rem;
@@ -235,7 +235,7 @@ p {
 
 /* Loading Bar Customization */
 .top-loading-bar {
-  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color)) !important;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);;
   height: 3px !important;
 }
 
