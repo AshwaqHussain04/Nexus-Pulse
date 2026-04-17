@@ -133,7 +133,7 @@
 }
 
 .card:hover .card-title {
-  color: var(--secondary-color);
+  color:#1e3a8a;
 }
 
 /* Card Text */
