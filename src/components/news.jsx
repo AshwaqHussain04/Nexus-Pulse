@@ -34,7 +34,7 @@ export default class News extends Component {
     };
     document.title = `${this.capitalizeFirstLetter(
       this.props.category
-    )} - News Beacon`;
+    )} -  Nexus Pulse`;
   }
 
   // Backend API configuration

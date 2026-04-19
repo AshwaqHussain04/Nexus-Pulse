@@ -244,6 +244,8 @@
   .card {
     margin-bottom: 0.75rem;
     border-radius: 10px;
+    max-width: 100%;
+    width: 100%;
   }
 
   .card-image-container {
@@ -294,6 +296,8 @@
     margin-bottom: 0.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+    max-width: 100%;
+    width: 100%;
   }
 
   .card:hover {
