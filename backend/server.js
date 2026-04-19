@@ -9,10 +9,24 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const MEDIASTACK_API_KEY = process.env.MEDIASTACK_API_KEY;
 const MEDIASTACK_BASE_URL = 'https://api.mediastack.com/v1/news';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://nexus-pulse-psi.vercel.app';
 
 // Enable CORS for frontend requests
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:5174',
+  FRONTEND_URL
+];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174'],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed'));
+    }
+  },
   credentials: true
 }));
 
