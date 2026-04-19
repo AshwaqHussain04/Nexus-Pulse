@@ -37,9 +37,8 @@ export default class News extends Component {
     )} - News Beacon`;
   }
 
-  // MediaStack API configuration
-  MEDIASTACK_API_KEY = import.meta.env.VITE_MEDIASTACK_API_KEY;
-  MEDIASTACK_BASE_URL = import.meta.env.VITE_MEDIASTACK_BASE_URL;
+  // Backend API configuration
+  BACKEND_API_URL = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:3001/api/news';
   CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
   
 
@@ -126,7 +125,8 @@ export default class News extends Component {
       }
 
       this.props.setProgress(0);
-      const url = `${this.MEDIASTACK_BASE_URL}?access_key=${this.MEDIASTACK_API_KEY}&categories=${category}&countries=in&limit=${this.props.pageSize}&offset=0`;
+      // ✅ Call backend proxy (API key is hidden there)
+      const url = `${this.BACKEND_API_URL}?categories=${category}&limit=${this.props.pageSize}&offset=0`;
       this.props.setProgress(10);
 
       
@@ -203,7 +203,8 @@ export default class News extends Component {
       this.props.setProgress(0);
 
       const category = this.props.category.toLowerCase();
-      const url = `${this.MEDIASTACK_BASE_URL}?access_key=${this.MEDIASTACK_API_KEY}&categories=${category}&countries=in&limit=${this.props.pageSize}`;
+      // ✅ Call backend proxy (API key is hidden there)
+      const url = `${this.BACKEND_API_URL}?categories=${category}&limit=${this.props.pageSize}&offset=${newOffset}`;
       this.props.setProgress(10);
 
       this.setState({ loading: true });
@@ -286,8 +287,10 @@ export default class News extends Component {
             <div className="Container">
               <div className="row">
                 {(this.state.articles || []).map((element, index) => {
+                  // Create unique key from multiple properties to avoid duplicates
+                  const uniqueKey = `${element.title}-${element.published_at}-${index}`;
                   return (
-                    <div className="col-md-4" key={element.url || index}>
+                    <div className="col-md-4" key={uniqueKey}>
                       <Newscomponent
                         title={element.title || "No Title"}
                         description={element.description || "No description available"}
