@@ -33,20 +33,22 @@ export default class News extends Component {
       lastUpdated: null,
     };
     document.title = `${this.capitalizeFirstLetter(
-      this.props.category
+      this.props.category,
     )} -  Nexus Pulse`;
   }
 
   // Backend API configuration
-  BACKEND_API_URL = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:3001/api/news';
+  BACKEND_API_URL =
+    import.meta.env.VITE_BACKEND_API_URL || "http://localhost:3001/api/news";
   CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-  
 
   // Get request count from localStorage
   getRequestCountFromStorage = () => {
     const stored = localStorage.getItem("mediastack_request_count");
-    const data = stored ? JSON.parse(stored) : { count: 0, date: new Date().toDateString() };
-    
+    const data = stored
+      ? JSON.parse(stored)
+      : { count: 0, date: new Date().toDateString() };
+
     // Reset count if it's a new day
     if (data.date !== new Date().toDateString()) {
       return { count: 0, date: new Date().toDateString() };
@@ -89,14 +91,16 @@ export default class News extends Component {
       articles: articles,
       timestamp: new Date().getTime(),
     };
-    localStorage.setItem(`mediastack_cache_${category}`, JSON.stringify(cacheData));
+    localStorage.setItem(
+      `mediastack_cache_${category}`,
+      JSON.stringify(cacheData),
+    );
   };
 
   async updateNews() {
-
     try {
       const category = this.props.category.toLowerCase();
-      
+
       // Check cache first
       const cachedArticles = this.getCachedData(category);
       if (cachedArticles) {
@@ -113,7 +117,8 @@ export default class News extends Component {
       // Check if we're running low on requests
       if (this.state.requestCount.count >= 80) {
         this.setState({
-          error: "⚠️ API limit almost reached (80/100). Using cached data. Request limit resets daily.",
+          error:
+            "⚠️ API limit almost reached (80/100). Using cached data. Request limit resets daily.",
           loading: false,
         });
         // Try to use any cached data
@@ -126,15 +131,13 @@ export default class News extends Component {
 
       this.props.setProgress(0);
       // ✅ Call backend proxy (API key is hidden there)
-      const url = `${this.BACKEND_API_URL}?categories=${category}&limit=${this.props.pageSize}&offset=0`;
+      const url = `/api/news?categories=${category}&limit=${this.props.pageSize}&offset=0`;
       this.props.setProgress(10);
-
-      
 
       this.setState({ loading: true, error: null });
 
       const response = await fetch(url);
-      
+
       this.props.setProgress(40);
 
       if (!response.ok) {
@@ -194,7 +197,8 @@ export default class News extends Component {
       if (this.state.requestCount.count >= 95) {
         this.setState({
           hasMore: false,
-          error: "⚠️ API limit reached! Cannot load more articles. Limit resets daily.",
+          error:
+            "⚠️ API limit reached! Cannot load more articles. Limit resets daily.",
         });
         return;
       }
@@ -204,7 +208,7 @@ export default class News extends Component {
 
       const category = this.props.category.toLowerCase();
       // ✅ Call backend proxy (API key is hidden there)
-      const url = `${this.BACKEND_API_URL}?categories=${category}&limit=${this.props.pageSize}&offset=${newOffset}`;
+      const url = `/api/news?categories=${category}&limit=${this.props.pageSize}&offset=${newOffset}`;
       this.props.setProgress(10);
 
       this.setState({ loading: true });
@@ -263,21 +267,21 @@ export default class News extends Component {
           </div>
         </div>
         <div className="container my-4">
-                      {this.state.error && (
-              <div
-                className="alert alert-danger alert-dismissible fade show shadow-sm"
-                role="alert"
-                style={{ transition: "all 0.3s ease" }}
-              >
-                <strong>⚠️ Notice:</strong> {this.state.error}
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => this.setState({ error: null })}
-                  aria-label="Close"
-                ></button>
-              </div>
-            )}
+          {this.state.error && (
+            <div
+              className="alert alert-danger alert-dismissible fade show shadow-sm"
+              role="alert"
+              style={{ transition: "all 0.3s ease" }}
+            >
+              <strong>⚠️ Notice:</strong> {this.state.error}
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => this.setState({ error: null })}
+                aria-label="Close"
+              ></button>
+            </div>
+          )}
           <InfiniteScroll
             dataLength={this.state.articles?.length || 0}
             next={this.fetchMoreData}
@@ -293,7 +297,9 @@ export default class News extends Component {
                     <div className="col-md-4" key={uniqueKey}>
                       <Newscomponent
                         title={element.title || "No Title"}
-                        description={element.description || "No description available"}
+                        description={
+                          element.description || "No description available"
+                        }
                         UrlImage={element.image}
                         url={element.url}
                         author={element.author || "Unknown"}
