@@ -37,9 +37,9 @@ export default class News extends Component {
     )} -  Nexus Pulse`;
   }
 
-  // Backend API configuration
-  BACKEND_API_URL =
-    import.meta.env.VITE_BACKEND_API_URL || "http://localhost:3001/api/news";
+  // MediaStack API configuration
+  MEDIASTACK_API_KEY = import.meta.env.VITE_MEDIASTACK_API_KEY;
+  MEDIASTACK_BASE_URL = "https://api.mediastack.com/v1/news";
   CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
   // Get request count from localStorage
@@ -129,14 +129,24 @@ export default class News extends Component {
         return;
       }
 
+      if (!this.MEDIASTACK_API_KEY) {
+        throw new Error("API key is not configured. Check your .env.local file.");
+      }
+
       this.props.setProgress(0);
-      // ✅ Call backend proxy (API key is hidden there)
-      const url = `/api/news?categories=${category}&limit=${this.props.pageSize}&offset=0`;
+      // ✅ Call MediaStack API directly from frontend
+      const url = new URL(this.MEDIASTACK_BASE_URL);
+      url.searchParams.append("access_key", this.MEDIASTACK_API_KEY);
+      url.searchParams.append("categories", category);
+      url.searchParams.append("countries", "in");
+      url.searchParams.append("limit", this.props.pageSize);
+      url.searchParams.append("offset", 0);
+
       this.props.setProgress(10);
 
       this.setState({ loading: true, error: null });
 
-      const response = await fetch(url);
+      const response = await fetch(url.toString());
 
       this.props.setProgress(40);
 
@@ -207,13 +217,24 @@ export default class News extends Component {
       this.props.setProgress(0);
 
       const category = this.props.category.toLowerCase();
-      // ✅ Call backend proxy (API key is hidden there)
-      const url = `/api/news?categories=${category}&limit=${this.props.pageSize}&offset=${newOffset}`;
+
+      if (!this.MEDIASTACK_API_KEY) {
+        throw new Error("API key is not configured. Check your .env.local file.");
+      }
+
+      // ✅ Call MediaStack API directly from frontend
+      const url = new URL(this.MEDIASTACK_BASE_URL);
+      url.searchParams.append("access_key", this.MEDIASTACK_API_KEY);
+      url.searchParams.append("categories", category);
+      url.searchParams.append("countries", "in");
+      url.searchParams.append("limit", this.props.pageSize);
+      url.searchParams.append("offset", newOffset);
+
       this.props.setProgress(10);
 
       this.setState({ loading: true });
 
-      const response = await fetch(url);
+      const response = await fetch(url.toString());
       this.props.setProgress(60);
 
       if (!response.ok) {
@@ -267,21 +288,7 @@ export default class News extends Component {
           </div>
         </div>
         <div className="container my-4">
-          {this.state.error && (
-            <div
-              className="alert alert-danger alert-dismissible fade show shadow-sm"
-              role="alert"
-              style={{ transition: "all 0.3s ease" }}
-            >
-              <strong>⚠️ Notice:</strong> {this.state.error}
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => this.setState({ error: null })}
-                aria-label="Close"
-              ></button>
-            </div>
-          )}
+
           <InfiniteScroll
             dataLength={this.state.articles?.length || 0}
             next={this.fetchMoreData}
