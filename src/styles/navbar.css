@@ -31,7 +31,7 @@
 }
 
 .navbar-brand::before {
-  content: '';
+  content: "";
   width: 24px;
   height: 24px;
   background: linear-gradient(135deg, #f59e0b, #f97316);
@@ -40,7 +40,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -64,7 +65,7 @@
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -189,7 +190,7 @@
   }
 
   .nav-link.active::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     width: 3px;
@@ -249,7 +250,7 @@
 /* Dark Mode Toggle Button in Mobile */
 @media (max-width: 991px) {
   .dark-mode-toggle {
-    width: 40px;
+    width: 80px;
     height: 40px;
     font-size: 1.1rem;
     margin-left: 0;
@@ -257,8 +258,10 @@
   }
 
   .navbar-collapse {
-    display: flex !important;
-    flex-direction: column !important;
+    .navbar-collapse.show {
+      display: flex !important;
+      flex-direction: column;
+    }
   }
 
   .d-flex.dark-mode-toggle {
