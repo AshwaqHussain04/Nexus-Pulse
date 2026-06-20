@@ -10,7 +10,7 @@ const NavBarContent = () => {
       <nav className="navbar sticky-top navbar-expand-lg">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Nexus Pulse
+            News Beacon
           </a>
           <button
             className="navbar-toggler"
