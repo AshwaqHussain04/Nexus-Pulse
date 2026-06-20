@@ -34,12 +34,11 @@ export default class News extends Component {
     };
     document.title = `${this.capitalizeFirstLetter(
       this.props.category,
-    )} -  Nexus Pulse`;
+    )} -  NewsBeacon`; //update title to reflect for better branding
   }
 
-  // MediaStack API configuration
-  MEDIASTACK_API_KEY = import.meta.env.VITE_MEDIASTACK_API_KEY;
-  MEDIASTACK_BASE_URL = "https://api.mediastack.com/v1/news";
+  API_KEY = import.meta.env.VITE_MEDIASTACK_API_KEY; // Use environment variable for API key
+  API_URL = "https://api.mediastack.com/v1/news";
   CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
   // Get request count from localStorage
@@ -97,7 +96,7 @@ export default class News extends Component {
     );
   };
 
-  async updateNews() {
+  async updateNews() {    
     try {
       const category = this.props.category.toLowerCase();
 
@@ -129,24 +128,18 @@ export default class News extends Component {
         return;
       }
 
-      if (!this.MEDIASTACK_API_KEY) {
-        throw new Error("API key is not configured. Check your .env.local file.");
+      if (!this.API_URL) {
+        throw new Error("API endpoint is not configured.");
       }
 
       this.props.setProgress(0);
-      // ✅ Call MediaStack API directly from frontend
-      const url = new URL(this.MEDIASTACK_BASE_URL);
-      url.searchParams.append("access_key", this.MEDIASTACK_API_KEY);
-      url.searchParams.append("categories", category);
-      url.searchParams.append("countries", "in");
-      url.searchParams.append("limit", this.props.pageSize);
-      url.searchParams.append("offset", 0);
-
+      const url = `${this.API_URL}?access_key=${this.API_KEY}&categories=${category}&countries=in&languages=en&limit=${this.props.pageSize}&offset=0`;
       this.props.setProgress(10);
+     
 
       this.setState({ loading: true, error: null });
 
-      const response = await fetch(url.toString());
+      const response = await fetch(url);
 
       this.props.setProgress(40);
 
@@ -173,7 +166,7 @@ export default class News extends Component {
         error: null,
         lastUpdated: new Date().toLocaleTimeString(),
       });
-
+      
       this.props.setProgress(100);
     } catch (error) {
       console.error("Error fetching news:", error);
@@ -218,23 +211,18 @@ export default class News extends Component {
 
       const category = this.props.category.toLowerCase();
 
-      if (!this.MEDIASTACK_API_KEY) {
-        throw new Error("API key is not configured. Check your .env.local file.");
+      if (!this.API_URL) {
+        throw new Error("API endpoint is not configured.");
       }
 
-      // ✅ Call MediaStack API directly from frontend
-      const url = new URL(this.MEDIASTACK_BASE_URL);
-      url.searchParams.append("access_key", this.MEDIASTACK_API_KEY);
-      url.searchParams.append("categories", category);
-      url.searchParams.append("countries", "in");
-      url.searchParams.append("limit", this.props.pageSize);
-      url.searchParams.append("offset", newOffset);
-
+      // ✅ Call Vercel serverless function (API key is hidden there)
+      const url = `${this.API_URL}?access_key=${this.API_KEY}&categories=${category}&countries=in&languages=en&limit=${this.props.pageSize}&offset=${newOffset}`;
       this.props.setProgress(10);
 
       this.setState({ loading: true });
 
-      const response = await fetch(url.toString());
+      const response = await fetch(url);
+      
       this.props.setProgress(60);
 
       if (!response.ok) {

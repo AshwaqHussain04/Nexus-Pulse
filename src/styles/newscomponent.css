@@ -12,6 +12,11 @@
   position: relative;
 }
 
+.dark-mode .card {
+  background: var(--bg-white);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
 .card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
@@ -132,8 +137,16 @@
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.dark-mode .card-title {
+  color: #93c5fd;
+}
+
 .card:hover .card-title {
   color:#1e3a8a;
+}
+
+.dark-mode .card:hover .card-title {
+  color: #bfdbfe;
 }
 
 /* Card Text */
@@ -346,6 +359,195 @@
     padding: 0.55rem 0.85rem;
     font-size: 0.75rem;
     letter-spacing: 0.2px;
+  }
+}
+
+/* Card Actions Container */
+.card-actions {
+  margin-bottom: 1rem;
+}
+
+/* Share Buttons Container */
+.share-buttons-container {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Share Button Base Styles */
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: white;
+  text-decoration: none;
+  white-space: nowrap;
+  flex: 1;
+  justify-content: center;
+  min-height: 36px;
+}
+
+.share-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Twitter Share Button */
+.share-twitter {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-twitter:hover {
+  background: linear-gradient(135deg, #1a1a1a, #000000);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.share-twitter:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Facebook Share Button */
+.share-facebook {
+  background: linear-gradient(135deg, #1877f2, #0c63e4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-facebook:hover {
+  background: linear-gradient(135deg, #0c63e4, #1877f2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+.share-facebook:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(24, 119, 242, 0.2);
+}
+
+/* LinkedIn Share Button */
+.share-linkedin {
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-linkedin:hover {
+  background: linear-gradient(135deg, #004182, #0a66c2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+}
+
+.share-linkedin:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(10, 102, 194, 0.2);
+}
+
+/* Copy Link Button */
+.share-copy {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-copy:hover {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.share-copy:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);
+}
+
+/* Share Buttons - Tablet Responsive */
+@media (max-width: 768px) {
+  .share-buttons-container {
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .share-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    min-height: 32px;
+    flex: 0 1 calc(50% - 0.25rem);
+  }
+
+  .share-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .share-icon {
+    font-size: 1rem;
+  }
+}
+
+/* Share Buttons - Mobile Responsive */
+@media (max-width: 576px) {
+  .share-buttons-container {
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+  }
+
+  .share-btn {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.75rem;
+    min-height: 30px;
+    flex: 0 1 calc(50% - 0.2rem);
+  }
+
+  .share-logo {
+    width: 18px;
+    height: 18px;
+  }
+
+  .share-icon {
+    font-size: 0.9rem;
+  }
+}
+
+/* Share Buttons - Small Mobile */
+@media (max-width: 480px) {
+  .share-buttons-container {
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .share-btn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.7rem;
+    min-height: 28px;
+    flex: 0 1 calc(50% - 0.15rem);
+  }
+
+  .share-logo {
+    width: 16px;
+    height: 16px;
+  }
+
+  .share-icon {
+    font-size: 0.8rem;
   }
 }
 

@@ -17,6 +17,22 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark Mode Variables */
+:root.dark-mode {
+  --primary-color: #60a5fa;
+  --secondary-color: #3b82f6;
+  --accent-color: #f59e0b;
+  --text-dark: #f3f4f6;
+  --text-light: #d1d5db;
+  --bg-light: #111827;
+  --bg-white: #1f2937;
+  --border-color: #374151;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
 * {
   margin: 0;
   padding: 0;

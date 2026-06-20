@@ -17,6 +17,17 @@
   --border: #e5e7eb;
 }
 
+/* Dark Mode Variables */
+:root.dark-mode {
+  --primary: #60a5fa;
+  --primary-light: #3b82f6;
+  --secondary: #f59e0b;
+  --text-dark: #f3f4f6;
+  --text-light: #d1d5db;
+  --bg-light: #111827;
+  --border: #374151;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -26,6 +37,7 @@ body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
@@ -56,11 +68,11 @@ code {
 
 /* Selection Styling */
 ::selection {
-  background-color: var(--primary-light);
+  background: var(--primary-light);
   color: white;
 }
 
 ::-moz-selection {
-  background-color: var(--primary-light);
+  background: var(--primary-light);
   color: white;
 }

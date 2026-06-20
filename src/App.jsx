@@ -3,6 +3,7 @@ import NavBar from './components/navbar'
 import News from './components/news'
 import { BrowserRouter as Router, Routes, Route, Form } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
+import { DarkModeProvider } from './context/DarkModeContext'
 import './styles/App.css'
 import { useState } from 'react';
 
@@ -17,7 +18,7 @@ export default class App extends Component {
     }
   render() {
     return (
-      <div>
+      <DarkModeProvider>
         <Router>
         <NavBar/>
         <LoadingBar
@@ -34,8 +35,9 @@ export default class App extends Component {
             <Route path="/technology" element={<News setProgress={this.setProgress} Apikey={this.Apikey} country='us' pageSize={8} category= "technology"/>} />
           </Routes>
         </Router>
-      </div>
+      </DarkModeProvider>
     )
   }
 }
+
 
